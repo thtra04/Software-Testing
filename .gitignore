@@ -5,6 +5,7 @@ target/
 
 # Visual Studio
 .vs/
+.vscode/
 
 # Temporary files
 ~$*
