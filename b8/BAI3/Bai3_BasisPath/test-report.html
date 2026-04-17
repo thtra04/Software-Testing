@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Báo Cáo Kiểm Thử Đường Cơ Sở – tinhPhiShip</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f4f8;
+            color: #2d3748;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 28px 40px;
+        }
+
+        header h1 {
+            font-size: 1.7rem;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* ── Summary cards ─────────────────────────────────────────── */
+        .cards {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            flex: 1 1 160px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+        }
+
+        .card .num {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .card .lbl {
+            font-size: 0.82rem;
+            color: #718096;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .card.pass .num {
+            color: #276749;
+        }
+
+        .card.fail .num {
+            color: #c53030;
+        }
+
+        .card.skip .num {
+            color: #c05621;
+        }
+
+        .card.total .num {
+            color: #2b6cb0;
+        }
+
+        .card.cc .num {
+            color: #6b46c1;
+        }
+
+        /* ── Section titles ─────────────────────────────────────────── */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            border-left: 4px solid #2b6cb0;
+            padding-left: 12px;
+            margin: 30px 0 14px;
+        }
+
+        /* ── CC Analysis box ────────────────────────────────────────── */
+        .cc-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 22px 28px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+            margin-bottom: 24px;
+        }
+
+        .cc-box .formula {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #553c9a;
+            background: #f5f0ff;
+            padding: 10px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .cc-box ul {
+            padding-left: 22px;
+            line-height: 1.9;
+        }
+
+        .cc-box ul li code {
+            font-size: 0.85rem;
+            background: #edf2f7;
+            border-radius: 4px;
+            padding: 1px 5px;
+        }
+
+        /* ── Basis path table ───────────────────────────────────────── */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 0.88rem;
+        }
+
+        thead {
+            background: #2b6cb0;
+            color: #fff;
+        }
+
+        thead th {
+            padding: 12px 14px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        tbody tr:hover {
+            background: #ebf4ff;
+            transition: background 0.15s;
+        }
+
+        tbody td {
+            padding: 11px 14px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 2px 9px;
+        }
+
+        .badge-pass {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .badge-t {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .badge-f {
+            background: #fed7d7;
+            color: #822727;
+        }
+
+        .badge-dash {
+            background: #e2e8f0;
+            color: #718096;
+        }
+
+        .badge-exc {
+            background: #fefcbf;
+            color: #744210;
+        }
+
+        code {
+            font-family: 'Cascadia Code', Consolas, monospace;
+        }
+
+        footer {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 0.82rem;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Báo Cáo Kiểm Thử Đường Cơ Sở (Basis Path Testing)</h1>
+        <p>Bài tập 4.2 &nbsp;|&nbsp; Hàm: <code>PhiShip.tinhPhiShip(trongLuong, vung, laMember)</code>
+            &nbsp;|&nbsp; Thời gian: 10/03/2026</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Summary cards -->
+        <div class="cards">
+            <div class="card total">
+                <div class="num">8</div>
+                <div class="lbl">Tổng số test</div>
+            </div>
+            <div class="card pass">
+                <div class="num">8</div>
+                <div class="lbl">Passed</div>
+            </div>
+            <div class="card fail">
+                <div class="num">0</div>
+                <div class="lbl">Failed</div>
+            </div>
+            <div class="card skip">
+                <div class="num">0</div>
+                <div class="lbl">Skipped</div>
+            </div>
+            <div class="card cc">
+                <div class="num">8</div>
+                <div class="lbl">Cyclomatic CC</div>
+            </div>
+        </div>
+
+        <!-- CC Analysis -->
+        <div class="section-title">Phân Tích Độ Phức Tạp Cyclomatic</div>
+        <div class="cc-box">
+            <div class="formula">CC = số quyết định + 1 = 7 + 1 = <strong>8</strong></div>
+            <p style="margin-top:12px;margin-bottom:6px;font-weight:600;">Danh sách 7 quyết định (D1–D7):</p>
+            <ul>
+                <li><code>D1</code>: <code>trongLuong &lt;= 0</code> → ném ngoại lệ</li>
+                <li><code>D2</code>: <code>vung.equals("noi_thanh")</code></li>
+                <li><code>D3</code>: <code>trongLuong &gt; 5</code> (bên trong nhánh nội thành)</li>
+                <li><code>D4</code>: <code>vung.equals("ngoai_thanh")</code> (else-if)</li>
+                <li><code>D5</code>: <code>trongLuong &gt; 3</code> (bên trong nhánh ngoại thành)</li>
+                <li><code>D6</code>: <code>trongLuong &gt; 2</code> (bên trong nhánh tỉnh khác)</li>
+                <li><code>D7</code>: <code>laMember</code> → giảm 10%</li>
+            </ul>
+            <p style="margin-top:10px;color:#4a5568;">
+                CC = 8 &nbsp;→&nbsp; cần đúng <strong>8 đường cơ sở</strong> để phủ đủ toàn bộ cạnh độc lập trên CFG.
+            </p>
+        </div>
+
+        <!-- Basis Path Table -->
+        <div class="section-title">Chi Tiết 8 Đường Cơ Sở</div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên Test Method</th>
+                        <th>D1</th>
+                        <th>D2</th>
+                        <th>D3</th>
+                        <th>D4</th>
+                        <th>D5</th>
+                        <th>D6</th>
+                        <th>D7</th>
+                        <th>Đầu vào</th>
+                        <th>Kết quả kỳ vọng</th>
+                        <th>Kết quả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><code>testPath1_TrongLuongKhongHopLe</code></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><code>(-1, "noi_thanh", false)</code></td>
+                        <td><span class="badge badge-exc">IllegalArgumentException</span></td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><code>testPath2_NoiThanh_NheHon5kg_KhongMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><code>(3, "noi_thanh", false)</code></td>
+                        <td>15 000.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><code>testPath3_NoiThanh_NangHon5kg_KhongMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><code>(7, "noi_thanh", false)</code></td>
+                        <td>19 000.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><code>testPath4_NoiThanh_NheHon5kg_LaMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><code>(3, "noi_thanh", true)</code></td>
+                        <td>13 500.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><code>testPath5_NgoaiThanh_NheHon3kg_KhongMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><code>(2, "ngoai_thanh", false)</code></td>
+                        <td>25 000.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><code>testPath6_NgoaiThanh_NangHon3kg_KhongMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><code>(5, "ngoai_thanh", false)</code></td>
+                        <td>31 000.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><code>testPath7_TinhKhac_NheHon2kg_KhongMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><code>(1, "tinh_khac", false)</code></td>
+                        <td>50 000.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><code>testPath8_TinhKhac_NangHon2kg_KhongMember</code></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><span class="badge badge-dash">–</span></td>
+                        <td><span class="badge badge-t">T</span></td>
+                        <td><span class="badge badge-f">F</span></td>
+                        <td><code>(4, "tinh_khac", false)</code></td>
+                        <td>60 000.0</td>
+                        <td><span class="badge badge-pass">PASS</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Legend -->
+        <div class="section-title">Chú Thích Tính Phí Ship</div>
+        <div class="cc-box">
+            <ul>
+                <li><strong>Nội thành</strong>: base = 15 000 VNĐ. Mỗi kg vượt 5 kg: +2 000 VNĐ/kg</li>
+                <li><strong>Ngoại thành</strong>: base = 25 000 VNĐ. Mỗi kg vượt 3 kg: +3 000 VNĐ/kg</li>
+                <li><strong>Tỉnh khác</strong>: base = 50 000 VNĐ. Mỗi kg vượt 2 kg: +5 000 VNĐ/kg</li>
+                <li><strong>Thành viên (member)</strong>: giảm 10% tổng phí</li>
+                <li><strong>Trọng lượng ≤ 0</strong>: ném <code>IllegalArgumentException</code></li>
+            </ul>
+            <p style="margin-top:14px;"><strong>Ví dụ Path 3</strong>:
+                trongLuong=7, noi_thanh, false
+                → phi = 15 000 + (7−5)×2 000 = 15 000 + 4 000 = <strong>19 000 VNĐ</strong>
+            </p>
+            <p style="margin-top:8px;"><strong>Ví dụ Path 8</strong>:
+                trongLuong=4, tinh_khac, false
+                → phi = 50 000 + (4−2)×5 000 = 50 000 + 10 000 = <strong>60 000 VNĐ</strong>
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        Bài tập 4.2 – Kiểm thử đường cơ sở &nbsp;|&nbsp; TestNG 7.8.0 &nbsp;|&nbsp;
+        Tests: 8/8 PASS &nbsp;|&nbsp; CC = 8
+    </footer>
+
+</body>
+
+</html>

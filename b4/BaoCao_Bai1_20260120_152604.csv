@@ -1,0 +1,14 @@
+﻿BÁO CÁO KIỂM THỬ - BÀI 1 - HÀM POWER,,,,,,
+Ngày thực hiện: 20/01/2026 15:26:04,,,,,,
+Tổng số test cases: 6,,,,,,
+Số test PASS: 6,,,,,,
+Số test FAIL: 0,,,,,,
+Tỉ lệ PASS: 100.00%,,,,,,
+,,,,,,
+STT,Tên Test Case,Input,Kết quả kì vọng,Kết quả thực tế,Trạng thái,Thời gian thực hiện
+1,Test 1: n = 0,"Power(2, 0)",1,1,PASS,15:25:53
+2,Test 2: n > 0,"Power(2, 3)",8,8,PASS,15:25:53
+3,Test 3: n > 0 khác,"Power(5, 2)",25,25,PASS,15:25:53
+4,Test 4: n < 0,"Power(2, -2)",0.25,0.25,PASS,15:25:53
+5,Test 5: n < 0 khác,"Power(10, -1)",0.1,0.1,PASS,15:25:53
+6,Test 6: x = 1,"Power(1, 5)",1,1,PASS,15:25:53

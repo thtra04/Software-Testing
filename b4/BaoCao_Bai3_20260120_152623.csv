@@ -1,0 +1,17 @@
+﻿BÁO CÁO KIỂM THỬ - BÀI 3 - CLASS RADIX,,,,,,
+Ngày thực hiện: 20/01/2026 15:26:23,,,,,,
+Tổng số test cases: 9,,,,,,
+Số test PASS: 9,,,,,,
+Số test FAIL: 0,,,,,,
+Tỉ lệ PASS: 100.00%,,,,,,
+,,,,,,
+STT,Tên Test Case,Input,Kết quả kì vọng,Kết quả thực tế,Trạng thái,Thời gian thực hiện
+1,Test 1: Sang nhị phân,10 -> cơ số 2,1010,1010,PASS,15:26:21
+2,Test 2: Sang hex,255 -> cơ số 16,FF,FF,PASS,15:26:21
+3,Test 3: Sang bát phân,64 -> cơ số 8,100,100,PASS,15:26:21
+4,Test 4: Sang cơ số 5,100 -> cơ số 5,400,400,PASS,15:26:21
+5,Test 5: 31 sang hex,31 -> cơ số 16,1F,1F,PASS,15:26:21
+6,Test 6: Sang cơ số 12,1000 -> cơ số 12,6B4,6B4,PASS,15:26:21
+7,Test 7: Exception số âm,Radix(-5),Incorrect Value,Incorrect Value,PASS,15:26:21
+8,Test 8: Exception radix < 2,radix = 1,Invalid Radix,Invalid Radix,PASS,15:26:21
+9,Test 9: Exception radix > 16,radix = 17,Invalid Radix,Invalid Radix,PASS,15:26:21

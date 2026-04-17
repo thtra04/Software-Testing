@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite name="SauceDemo_Smoke_Suite" verbose="1" parallel="tests" thread-count="2">
+
+    <parameter name="baseUrl" value="https://www.saucedemo.com"/>
+    <parameter name="browser"  value="chrome"/>
+
+    <groups>
+        <run>
+            <include name="smoke"/>
+        </run>
+    </groups>
+
+    <test name="Login Tests - Smoke">
+        <classes>
+            <class name="dtm.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Cart Tests - Smoke">
+        <classes>
+            <class name="dtm.CartTest"/>
+        </classes>
+    </test>
+
+    <test name="Checkout Tests - Smoke">
+        <classes>
+            <class name="dtm.CheckoutTest"/>
+        </classes>
+    </test>
+
+</suite>

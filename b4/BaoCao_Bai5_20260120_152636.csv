@@ -1,0 +1,18 @@
+﻿BÁO CÁO KIỂM THỬ - BÀI 5 - QUẢN LÝ HỌC VIÊN,,,,,,
+Ngày thực hiện: 20/01/2026 15:26:36,,,,,,
+Tổng số test cases: 10,,,,,,
+Số test PASS: 9,,,,,,
+Số test FAIL: 1,,,,,,
+Tỉ lệ PASS: 90.00%,,,,,,
+,,,,,,
+STT,Tên Test Case,Input,Kết quả kì vọng,Kết quả thực tế,Trạng thái,Thời gian thực hiện
+1,Test 1: Số lượng HV,6 học viên,6,6,PASS,15:26:33
+2,Test 2: Điểm TB HV001,"Điểm [8.5,9.0,8.0]",8.5,8.5,PASS,15:26:33
+3,Test 3: HV001 đủ ĐK HB,"TB=8.5, min=8.0",TRUE,TRUE,PASS,15:26:33
+4,Test 4: HV002 không đủ ĐK,TB=7.0 < 8.0,FALSE,FALSE,PASS,15:26:33
+5,Test 5: HV004 có môn < 5,Có môn 4.5,FALSE,FALSE,PASS,15:26:33
+6,Test 6: HV003 đủ ĐK HB,"TB=9.0, min=8.5",TRUE,TRUE,PASS,15:26:33
+7,Test 7: Tìm HV HB,Tìm HV đủ ĐK,3,3,PASS,15:26:33
+8,Test 8: Xác định HV HB,3 HV cụ thể,"HV001,HV003,HV005",Count=3,PASS,15:26:33
+9,Test 9: TB = 8.0 (biên),TB=8.0,TRUE,TRUE,PASS,15:26:33
+10,Test 10: Môn = 5.0 (biên),min=5.0,TRUE,FALSE,FAIL,15:26:33

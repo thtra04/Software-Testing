@@ -1,0 +1,10 @@
+# Build output
+bin/
+obj/
+target/
+
+# Visual Studio
+.vs/
+
+# Temporary files
+~$*

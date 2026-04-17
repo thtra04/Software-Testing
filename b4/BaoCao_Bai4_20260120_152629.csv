@@ -1,0 +1,15 @@
+﻿BÁO CÁO KIỂM THỬ - BÀI 4 - CLASS HÌNH CHỮ NHẬT,,,,,,
+Ngày thực hiện: 20/01/2026 15:26:29,,,,,,
+Tổng số test cases: 7,,,,,,
+Số test PASS: 6,,,,,,
+Số test FAIL: 1,,,,,,
+Tỉ lệ PASS: 85.71%,,,,,,
+,,,,,,
+STT,Tên Test Case,Input,Kết quả kì vọng,Kết quả thực tế,Trạng thái,Thời gian thực hiện
+1,Test 1: Diện tích 5x4,"HCN (0,4)-(5,0)",20,20,PASS,15:26:27
+2,Test 2: Hình vuông 3x3,"HCN (1,4)-(4,1)",9,9,PASS,15:26:27
+3,Test 3: Giao nhau,HCN1 & HCN2,TRUE,TRUE,PASS,15:26:27
+4,Test 4: Tách rời,HCN tách rời,FALSE,FALSE,PASS,15:26:27
+5,Test 5: Chạm cạnh,HCN chạm cạnh,FALSE,TRUE,FAIL,15:26:27
+6,Test 6: Nằm trong,HCN nhỏ trong HCN lớn,TRUE,TRUE,PASS,15:26:27
+7,Test 7: Trùng nhau,2 HCN giống hệt,TRUE,TRUE,PASS,15:26:27
